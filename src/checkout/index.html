@@ -16,13 +16,13 @@
           src="/src/public/images/noun_Tent_2517.svg"
           alt="tent image for logo"
         />
-        <a href="../index.html">
+        <a href="/src/index.html">
           Sleep<span class="highlight">Outside</span>
         </a>
       </div>
 
       <div class="cart">
-        <a href="../cart/index.html">
+        <a href="/src/cart/index.html" aria-label="View shopping cart">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <path
               d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6 3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3 2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2 2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7 -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0C15.6 6.2 14.9 23.6 18.9 32.6z"
@@ -34,10 +34,10 @@
 
     <main class="divider">
       <section class="products checkout">
-        <h2>Review & Place Your Order</h2>
+        <h2>Review &amp; Place Your Order</h2>
 
-        <!-- Checkout form (required structure) -->
-        <form class="checkout-form">
+        <!-- Checkout form -->
+        <form class="checkout-form" method="post" action="#">
           <fieldset>
             <legend>Shipping Information</legend>
 
@@ -63,7 +63,13 @@
 
             <label>
               ZIP Code
-              <input type="text" name="zip" required />
+              <input
+                type="text"
+                name="zip"
+                pattern="[0-9]{5}"
+                placeholder="12345"
+                required
+              />
             </label>
           </fieldset>
 
@@ -72,17 +78,34 @@
 
             <label>
               Credit Card Number
-              <input type="text" name="cardNumber" required />
+              <input
+                type="text"
+                name="cardNumber"
+                inputmode="numeric"
+                placeholder="1234 5678 9012 3456"
+                required
+              />
             </label>
 
             <label>
               Expiration Date
-              <input type="text" name="expiration" required />
+              <input
+                type="text"
+                name="expiration"
+                placeholder="MM/YY"
+                required
+              />
             </label>
 
             <label>
               CVV
-              <input type="text" name="cvv" required />
+              <input
+                type="text"
+                name="cvv"
+                inputmode="numeric"
+                pattern="[0-9]{3,4}"
+                required
+              />
             </label>
           </fieldset>
 
@@ -93,6 +116,6 @@
       </section>
     </main>
 
-    <footer>&copy;NOT a real business</footer>
+    <footer>&copy; NOT a real business</footer>
   </body>
 </html>
