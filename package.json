@@ -5,10 +5,11 @@
   "main": "main.js",
   "scripts": {
     "start": "vite",
+    "dev": "vite",
     "build": "vite build --emptyOutDir",
+    "test": "jest",
     "lint": "eslint *.js src/**/*.js",
-    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
-    "test": "jest"
+    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\""
   },
   "author": "Shane Thompson",
   "license": "ISC",
@@ -21,9 +22,7 @@
     "vite": "^5.4.7"
   },
   "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
+    "presets": ["@babel/preset-env"]
   },
   "browserslist": [
     "last 3 and_chr versions",
