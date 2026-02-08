@@ -1,24 +1,36 @@
-export async function convertToJson(res) {
-  const jsonResponse = await res.json(); // parse body first
+const baseURL = "https://wdd330-backend.onrender.com/api/v1/";
+async function convertToJson(res) {
+  const data = await res.json();
   if (res.ok) {
-    return jsonResponse;
+    return data;
   } else {
-    // throw structured error with server details
-    throw { name: 'servicesError', message: jsonResponse };
+    throw { name: "servicesError", message: data };
   }
 }
 
 export default class ExternalServices {
-  constructor() {
-    this.baseUrl = '/api'; // adjust to your actual API base
+  constructor(category) {
+    // this.category = category;
+    // this.path = `../json/${this.category}.json`;
   }
-
-  async checkout(order) {
-    const response = await fetch(`${this.baseUrl}/checkout`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(order),
-    });
-    return convertToJson(response);
+  async getData(category) {
+    const response = await fetch(baseURL + `products/search/${category}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
+  async findProductById(id) {
+    const response = await fetch(baseURL + `product/${id}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
+  async checkout(payload) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    return await fetch(baseURL + "checkout/", options).then(convertToJson);
   }
 }
