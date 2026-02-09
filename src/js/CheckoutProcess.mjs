@@ -8,23 +8,27 @@ export default class CheckoutProcess {
 
   async checkout() {
     try {
-      const order = this.buildOrder(); // collect form/cart data
-      const result = await this.services.checkout(order);
+      const order = this.buildOrder();
+      await this.services.checkout(order);
 
-      // ✅ Success path
+      // ✅ Happy path
       localStorage.removeItem('so-cart');
       window.location.href = '/checkout/success.html';
     } catch (err) {
-      // Unhappy path
-      alertMessage(`Order failed: ${err.message.error || 'Unknown error'}`, true);
+      console.error(err);
+
+      const message =
+        err?.message?.message ||
+        err?.message ||
+        'Order failed. Please try again.';
+
+      alertMessage(message, true);
     }
   }
 
   buildOrder() {
-    // Example: collect form data
     const form = document.querySelector('#checkoutForm');
     const formData = new FormData(form);
-    const order = Object.fromEntries(formData.entries());
-    return order;
+    return Object.fromEntries(formData.entries());
   }
 }
