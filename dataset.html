@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dataset Activity</title>
+  <style>
+    /* Style items differently based on category */
+    li[data-category="fruit"] {
+      background-color: lightyellow;
+    }
+    li[data-category="vegetable"] {
+      background-color: lightgreen;
+    }
+    li[data-category="dairy"] {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product List</h1>
+  <ul id="items">
+    <li data-name="banana" data-category="fruit" data-color="yellow">Banana</li>
+    <li data-name="carrot" data-category="vegetable" data-color="orange">Carrot</li>
+    <li data-name="blueberry" data-category="fruit" data-color="blue">Blueberry</li>
+  </ul>
+
+  <script>
+    // Select all list items
+    const items = document.querySelectorAll('#items li');
+
+    // Create a details section
+    const details = document.createElement('div');
+    document.body.appendChild(details);
+
+    // Loop through items
+    items.forEach(item => {
+      // Log dataset values
+      console.log('Name:', item.dataset.name);
+      console.log('Category:', item.dataset.category);
+      console.log('Color:', item.dataset.color);
+
+      // Add click event to show details
+      item.addEventListener('click', () => {
+        details.innerHTML = `
+          <h2>Item Details</h2>
+          <p>Name: ${item.dataset.name}</p>
+          <p>Category: ${item.dataset.category}</p>
+          <p>Color: ${item.dataset.color}</p>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>
