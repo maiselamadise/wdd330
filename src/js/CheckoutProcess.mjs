@@ -1,3 +1,5 @@
+// src/js/CheckoutProcess.mjs
+
 import ExternalServices from './ExternalServices.mjs';
 import { alertMessage } from './utils.mjs';
 
@@ -14,6 +16,7 @@ export default class CheckoutProcess {
       // ✅ Happy path
       localStorage.removeItem('so-cart');
       window.location.href = '/checkout/success.html';
+
     } catch (err) {
       console.error(err);
 
@@ -29,6 +32,7 @@ export default class CheckoutProcess {
   buildOrder() {
     const form = document.querySelector('#checkoutForm');
     const formData = new FormData(form);
+
     return Object.fromEntries(formData.entries());
   }
 }

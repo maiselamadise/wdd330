@@ -230,6 +230,17 @@ button {
   width: 100%;
 }
 
+a.button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 0.5rem;
+  background-color: var(--secondary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+
 /* Cart cards */
 .cart-card {
   display: grid;
