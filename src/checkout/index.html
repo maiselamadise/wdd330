@@ -1,162 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Checkout</title>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
   </head>
-
   <body>
-    <header class="divider">
-      <div class="logo">
-        <img
-          src="/src/public/images/noun_Tent_2517.svg"
-          alt="tent image for logo"
-        />
-        <a href="/src/index.html">
-          Sleep<span class="highlight">Outside</span>
-        </a>
-      </div>
-
-      <div class="cart">
-        <a href="/src/cart/index.html" aria-label="View shopping cart">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <path
-              d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6
-              3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3
-              2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2
-              2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7
-              -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0
-              C15.6 6.2 14.9 23.6 18.9 32.6z"
-            />
-          </svg>
-        </a>
-      </div>
-    </header>
-
-    <main class="divider">
-      <section class="products checkout">
-        <h2>Review &amp; Place Your Order</h2>
-
-        <!-- CHECKOUT FORM -->
-        <form id="checkoutForm" class="checkout-form" novalidate>
+    <header class="divider" id="main-header"></header>
+    <main class="divider checkout">
+      <h2>Review & Place your Order</h2>
+      <section class="checkout-form">
+        <form name="checkout">
           <fieldset>
-            <legend>Shipping Information</legend>
-
-            <label>
-              First Name
-              <input type="text" name="fname" required minlength="2" />
-            </label>
-
-            <label>
-              Last Name
-              <input type="text" name="lname" required minlength="2" />
-            </label>
-
-            <label>
-              Address
-              <input type="text" name="address" required />
-            </label>
-
-            <label>
-              City
-              <input type="text" name="city" required />
-            </label>
-
-            <label>
-              State
-              <input type="text" name="state" required />
-            </label>
-
-            <label>
-              ZIP Code
-              <input
-                type="text"
-                name="zip"
-                pattern="[0-9]{5}"
-                placeholder="12345"
-                required
-              />
-            </label>
+            <legend>Shipping</legend>
+            <div class="checkout__name">
+              <label for="fname">First Name</label>
+              <input name="fname" required />
+              <label for="lname">Last Name</label>
+              <input name="lname" required />
+            </div>
+            <div class="checkout__address">
+              <label for="street">Street</label>
+              <input name="street" required />
+              <label for="city">City</label>
+              <input name="city" required />
+              <label for="state">State</label>
+              <input name="state" required />
+              <label for="zip">Zip</label>
+              <input name="zip" id="zip" required />
+            </div>
           </fieldset>
-
           <fieldset>
             <legend>Payment</legend>
-
-            <label>
-              Credit Card Number
-              <input
-                type="text"
-                name="cardNumber"
-                inputmode="numeric"
-                pattern="[0-9]{16}"
-                placeholder="1234567812345678"
-                required
-              />
-            </label>
-
-            <label>
-              Expiration Date
-              <input
-                type="text"
-                name="expiration"
-                placeholder="MM/YY"
-                required
-              />
-            </label>
-
-            <label>
-              CVV
-              <input
-                type="text"
-                name="code"
-                inputmode="numeric"
-                pattern="[0-9]{3}"
-                required
-              />
-            </label>
+            <label for="cardNumber">Card number</label>
+            <input name="cardNumber" required />
+            <label for="expiration">Expiration</label>
+            <input name="expiration" required />
+            <label for="code">Security Code</label>
+            <input name="code" required />
+          </fieldset>
+          <fieldset class="checkout-summary">
+            <legend>Order Summary</legend>
+            <ul>
+              <li>
+                <label for="cartTotal"
+                  >Item Subtotal(<span id="num-items"></span>)</label
+                >
+                <p name="cartTotal" id="cartTotal"></p>
+              </li>
+              <li>
+                <label for="shipping">Shipping Estimate</label>
+                <p id="shipping"></p>
+              </li>
+              <li>
+                <label for="tax">Tax</label>
+                <p id="tax"></p>
+              </li>
+              <li>
+                <label for="orderTotal"><b>Order Total</b></label>
+                <p id="orderTotal"></p>
+              </li>
+            </ul>
           </fieldset>
 
-          <button
-            type="submit"
-            id="checkoutSubmit"
-            class="checkout-button"
-          >
-            Place Order
-          </button>
+          <button id="checkoutSubmit" type="submit">Checkout</button>
         </form>
       </section>
     </main>
-
-    <footer>&copy; NOT a real business</footer>
-
-    <!-- CHECKOUT SCRIPT -->
-    <script type="module">
-      import CheckoutProcess from "/src/js/CheckoutProcess.mjs"
-
-      const myCheckout = new CheckoutProcess(
-        "so-cart",
-        "/src/order-success.html"
-      )
-
-      document
-        .querySelector("#checkoutSubmit")
-        .addEventListener("click", (e) => {
-          e.preventDefault()
-
-          const myForm = document.querySelector("#checkoutForm")
-          const isValid = myForm.checkValidity()
-
-          if (!isValid) {
-            myForm.reportValidity()
-            return
-          }
-
-          myCheckout.checkout()
-        })
-    </script>
+    <footer id="main-footer"></footer>
   </body>
 </html>

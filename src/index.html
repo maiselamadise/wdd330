@@ -1,68 +1,77 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Home</title>
-
-    <!-- FIXED: relative path for GitHub Pages + Vite -->
-    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="../src/css/style.css" />
+    <script src="../src/js/main.js" type="module"></script>
   </head>
-
   <body>
-    <!-- Dynamic Header -->
     <header class="divider" id="main-header"></header>
-
     <main class="divider">
       <div class="hero">
-        <!-- FIXED: relative image paths -->
         <img
-          src="./public/images/banner-sm.jpg"
-          srcset="
-            ./public/images/banner-sm.jpg 500w,
-            ./public/images/banner.jpg 1000w
-          "
-          sizes="(max-width: 600px) 500px, 1000px"
+          src="public/images/banner-sm.jpg"
+          srcset="images/banner-sm.jpg 500w, images/banner.jpg"
           alt="image of a high mountain lake"
         />
-
-        <!-- Product Categories -->
-        <section class="categories">
-          <a href="./product_listing/index.html?category=tents">
-            <img src="./public/images/tents.svg" alt="Tents" />
-            <p>Tents</p>
-          </a>
-
-          <a href="./product_listing/index.html?category=backpacks">
-            <img src="./public/images/backpacks.svg" alt="Backpacks" />
-            <p>Backpacks</p>
-          </a>
-
-          <a href="./product_listing/index.html?category=sleeping-bags">
-            <img src="./public/images/sleepingbags.svg" alt="Sleeping Bags" />
-            <p>Sleeping Bags</p>
-          </a>
-
-          <a href="./product_listing/index.html?category=hammocks">
-            <img src="./public/images/hammocks.svg" alt="Hammocks" />
-            <p>Hammocks</p>
-          </a>
-        </section>
-
-        <div class="mission">
-          <p>
-            Our mission is to provide you with everything you need to sleep
-            outside comfortably at an affordable price.
-          </p>
+        <div class="logo logo--square">
+          <img src="public/images/noun_Tent_2517.svg" alt="tent image for logo" />
+          <div>Sleep<span class="highlight">Outside</span></div>
         </div>
       </div>
+      <section class="mission">
+        <p>We spend too much time these days indoors...sitting usually.</p>
+        <p>No wonder we are a mess!</p>
+        <p>
+          What we really need is to get outside...in fact SLEEP outside. Our
+          mission is to provide you with everything you need to do this
+          comfortably at an affordable price.
+        </p>
+      </section>
+      <section class="products">
+        <ul class="product-grid">
+          <li>
+            <a href="src/product-listing/index.html?category=tents"
+              ><img
+                src="public/images/tents.svg"
+                alt="Tent Icon from Noun Project: Mustofa Bayu"
+              />
+              <h2>Tents</h2>
+            </a>
+          </li>
+          <li>
+            <a href="product-listing/index.html?category=backpacks"
+              ><img
+                src="public/images/backpacks.svg"
+                alt="Backpack Icon from Noun Project: Mustofa Bayu"
+              />
+              <h2>Backpacks</h2>
+            </a>
+          </li>
+          <li>
+            <a href="product-listing/index.html?category=sleeping-bags"
+              ><img
+                src="public/images/sleepingbags.svg"
+                alt="Sleeping Bag Icon from Noun Project: Mustofa Bayu"
+              />
+              <h2>Sleeping Bags</h2>
+            </a>
+          </li>
+          <li>
+            <a href="product-listing/index.html?category=hammocks"
+              ><img
+                src="public/images/hammocks.svg"
+                alt="Hammock Icon from Noun Project: Paul Richard"
+              />
+              <h2>Hammocks</h2>
+            </a>
+          </li>
+        </ul>
+      </section>
     </main>
-
-    <!-- Dynamic Footer -->
     <footer id="main-footer"></footer>
-
-    <!-- FIXED: relative JS path -->
-    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
-
