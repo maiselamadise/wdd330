@@ -142,6 +142,30 @@ button {
   cursor: pointer;
 }
 
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fdecea;
+  color: #611a15;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #f5c2c7;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.alert-message {
+  flex: 1;
+}
+
+.alert-close {
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }

@@ -10,8 +10,32 @@
   </head>
 
   <body>
-    <!-- HEADER PARTIAL -->
-    <header class="divider" id="main-header"></header>
+    <header class="divider">
+      <div class="logo">
+        <img
+          src="../public/images/noun_Tent_2517.svg"
+          alt="tent image for logo"
+        />
+        <a href="../index.html">
+          Sleep<span class="highlight">Outside</span>
+        </a>
+      </div>
+
+      <div class="cart">
+        <a href="../cart/index.html" aria-label="View shopping cart">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <path
+              d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6
+              3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3
+              2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2
+              2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7
+              -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0
+              C15.6 6.2 14.9 23.6 18.9 32.6z"
+            />
+          </svg>
+        </a>
+      </div>
+    </header>
 
     <main class="divider">
       <section class="products checkout">
@@ -19,7 +43,6 @@
 
         <!-- CHECKOUT FORM -->
         <form id="checkoutForm" class="checkout-form" novalidate>
-          <!-- SHIPPING -->
           <fieldset>
             <legend>Shipping Information</legend>
 
@@ -60,7 +83,6 @@
             </label>
           </fieldset>
 
-          <!-- PAYMENT -->
           <fieldset>
             <legend>Payment</legend>
 
@@ -109,35 +131,31 @@
       </section>
     </main>
 
-    <!-- FOOTER PARTIAL -->
-    <footer class="divider" id="site-footer"></footer>
+    <footer>&copy; NOT a real business</footer>
 
-    <!-- PARTIAL LOADERS -->
-    <script type="module" src="/src/js/main.js"></script>
-    <script type="module" src="/src/js/main.js"></script>
-
-    <!-- CHECKOUT LOGIC -->
+    <!-- CHECKOUT SCRIPT -->
     <script type="module">
       import CheckoutProcess from "/src/js/CheckoutProcess.mjs"
 
-      const checkout = new CheckoutProcess(
+      const myCheckout = new CheckoutProcess(
         "so-cart",
-        "/order-success.html"
+        "/src/order-success.html"
       )
 
       document
         .querySelector("#checkoutSubmit")
-        .addEventListener("click", (event) => {
-          event.preventDefault()
+        .addEventListener("click", (e) => {
+          e.preventDefault()
 
-          const form = document.querySelector("#checkoutForm")
+          const myForm = document.querySelector("#checkoutForm")
+          const isValid = myForm.checkValidity()
 
-          if (!form.checkValidity()) {
-            form.reportValidity()
+          if (!isValid) {
+            myForm.reportValidity()
             return
           }
 
-          checkout.checkout()
+          myCheckout.checkout()
         })
     </script>
   </body>
