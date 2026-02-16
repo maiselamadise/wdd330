@@ -1,25 +1,33 @@
-import { loadHeaderFooter } from "./utils.mjs";
-import CheckoutProcess from "./CheckoutProcess.mjs";
+import { loadHeaderFooter, alertMessage } from "./utils.mjs";
 
-loadHeaderFooter();
+document.addEventListener("DOMContentLoaded", init);
 
-const myCheckout = new CheckoutProcess("so-cart", ".checkout-summary");
-myCheckout.init();
+function init() {
+  loadHeaderFooter();
+  document
+    .querySelector("#checkout-form")
+    .addEventListener("submit", handleCheckout);
+}
 
-document
-  .querySelector("#zip")
-  .addEventListener("blur", myCheckout.calculateOrdertotal.bind(myCheckout));
-// listening for click on the button
-document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
-  e.preventDefault();
+function handleCheckout(event) {
+  event.preventDefault();
 
-  myCheckout.checkout();
-});
+  const form = event.target;
+  const formData = new FormData(form);
 
-// this is how it would look if we listen for the submit on the form
-// document.forms['checkout']
-// .addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   // e.target would contain our form in this case
-//    myCheckout.checkout();
-// });
+  const order = Object.fromEntries(formData.entries());
+
+  // 🔍 basic validation (extra safety)
+  if (!order.fullname || !order.address || !order.ccnum) {
+    alertMessage("Please fill in all required fields.");
+    return;
+  }
+
+  console.log("ORDER DATA:", order);
+
+  // ✅ clear cart
+  localStorage.removeItem("so-cart");
+
+  // ✅ redirect to success page
+  window.location.href = "../checkout/success.html";
+}
