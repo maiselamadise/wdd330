@@ -6,17 +6,17 @@
     <title>Sleep Outside | Checkout</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
 
   <body>
     <header class="divider">
       <div class="logo">
         <img
-          src="/src/public/images/noun_Tent_2517.svg"
+          src="../public/images/noun_Tent_2517.svg"
           alt="tent image for logo"
         />
-        <a href="/src/index.html">
+        <a href=".index.html">
           Sleep<span class="highlight">Outside</span>
         </a>
       </div>
@@ -25,7 +25,12 @@
         <a href="/src/cart/index.html" aria-label="View shopping cart">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <path
-              d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6 3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3 2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2 2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7 -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0C15.6 6.2 14.9 23.6 18.9 32.6z"
+              d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6
+              3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3
+              2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2
+              2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7
+              -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0
+              C15.6 6.2 14.9 23.6 18.9 32.6z"
             />
           </svg>
         </a>
@@ -36,14 +41,19 @@
       <section class="products checkout">
         <h2>Review &amp; Place Your Order</h2>
 
-        <!-- Checkout form -->
-        <form class="checkout-form" method="post" action="#">
+        <!-- CHECKOUT FORM -->
+        <form id="checkoutForm" class="checkout-form" novalidate>
           <fieldset>
             <legend>Shipping Information</legend>
 
             <label>
-              Full Name
-              <input type="text" name="fullName" required />
+              First Name
+              <input type="text" name="fname" required minlength="2" />
+            </label>
+
+            <label>
+              Last Name
+              <input type="text" name="lname" required minlength="2" />
             </label>
 
             <label>
@@ -82,7 +92,8 @@
                 type="text"
                 name="cardNumber"
                 inputmode="numeric"
-                placeholder="1234 5678 9012 3456"
+                pattern="[0-9]{16}"
+                placeholder="1234567812345678"
                 required
               />
             </label>
@@ -101,15 +112,19 @@
               CVV
               <input
                 type="text"
-                name="cvv"
+                name="code"
                 inputmode="numeric"
-                pattern="[0-9]{3,4}"
+                pattern="[0-9]{3}"
                 required
               />
             </label>
           </fieldset>
 
-          <button type="submit" class="checkout-button">
+          <button
+            type="submit"
+            id="checkoutSubmit"
+            class="checkout-button"
+          >
             Place Order
           </button>
         </form>
@@ -117,5 +132,31 @@
     </main>
 
     <footer>&copy; NOT a real business</footer>
+
+    <!-- CHECKOUT SCRIPT -->
+    <script type="module">
+      import CheckoutProcess from "/src/js/CheckoutProcess.mjs"
+
+      const myCheckout = new CheckoutProcess(
+        "so-cart",
+        "/src/order-success.html"
+      )
+
+      document
+        .querySelector("#checkoutSubmit")
+        .addEventListener("click", (e) => {
+          e.preventDefault()
+
+          const myForm = document.querySelector("#checkoutForm")
+          const isValid = myForm.checkValidity()
+
+          if (!isValid) {
+            myForm.reportValidity()
+            return
+          }
+
+          myCheckout.checkout()
+        })
+    </script>
   </body>
 </html>

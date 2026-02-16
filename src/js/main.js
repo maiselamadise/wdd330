@@ -1,8 +1,13 @@
-import ProductData from "./js/ProductData.mjs";
-import ProductList from "./js/ProductList.mjs";
+import { loadHeaderFooter, alertMessage } from "./utils.js";
 
-const dataSource = new ProductData("json/tents.json");
-const listElement = document.querySelector(".product-list");
+document.addEventListener("DOMContentLoaded", init);
 
-const productList = new ProductList("tent", dataSource, listElement);
-productList.init();
+async function init() {
+  try {
+    // Load shared header and footer
+    await loadHeaderFooter();
+  } catch (error) {
+    console.error("Initialization error:", error);
+    alertMessage("Something went wrong loading the page.");
+  }
+}

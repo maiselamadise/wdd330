@@ -5,10 +5,11 @@
   "main": "main.js",
   "scripts": {
     "start": "vite",
+    "dev": "vite",
     "build": "vite build --emptyOutDir",
+    "test": "jest",
     "lint": "eslint *.js src/**/*.js",
-    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
-    "test": "jest"
+    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\""
   },
   "author": "Shane Thompson",
   "license": "ISC",
@@ -18,7 +19,7 @@
     "eslint-plugin-import": "^2.29.1",
     "jest": "^29.7.0",
     "prettier": "^3.2.5",
-    "vite": "^5.4.7"
+    "vite": "^7.3.1"
   },
   "babel": {
     "presets": [
